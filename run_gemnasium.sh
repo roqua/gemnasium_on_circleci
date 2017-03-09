@@ -7,3 +7,5 @@ if [ -n "${CIRCLE_RUN_GEMNASIUM}" ]; then
     [ -z "$GEMNASIUM_TESTSUITE" ] && export GEMNASIUM_TESTSUITE="bundle exec rspec spec";
     gemnasium --token $GEMNASIUM_TOKEN autoupdate run;
 fi
+
+true;
