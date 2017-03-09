@@ -5,6 +5,13 @@ if [ -n "${CIRCLE_RUN_GEMNASIUM}" ]; then
     sudo apt-get update;
     sudo apt-get install gemnasium-toolbelt;
     [ -z "$GEMNASIUM_TESTSUITE" ] && export GEMNASIUM_TESTSUITE="bundle exec rspec spec";
+
+    mkdir -p gemnasium_scripts;
+    touch gemnasium_scripts/tests.sh;
+    echo '#!/bin/sh' > gemnasium_scripts/tests.sh;
+    echo $GEMNASIUM_TESTSUITE >> gemnasium_scripts/tests.sh;
+    chmod +x gemnasium_scripts/tests.sh;
+    export GEMNASIUM_TESTSUITE="gemnasium_scripts/tests.sh";
     gemnasium --token $GEMNASIUM_TOKEN autoupdate run;
 fi
 
